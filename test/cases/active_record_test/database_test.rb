@@ -1,9 +1,12 @@
 require 'active_record'
 require File.expand_path("#{File.dirname(__FILE__)}/../../config")
+require File.expand_path("#{File.dirname(__FILE__)}/../../data/sqlite_setup")
 require File.expand_path("#{File.dirname(__FILE__)}/../../data/activerecord_setup")
 require File.expand_path("#{File.dirname(__FILE__)}/../../data/countries_table")
 
 ActiveRecord::Migration.verbose = false
+
+SqliteSetup.create_db
 
 module ActiveRecordTest
   class DatabaseMissingConnection < Test::Unit::TestCase

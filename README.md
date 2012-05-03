@@ -1,4 +1,4 @@
-# General
+# General [![Build Status](https://secure.travis-ci.org/kot-begemot/undestroyable.png?branch=master)](http://travis-ci.org/kot-begemot/undestroyable)
 
 An aim for this gem is to provide an agile and comfortable way for Ruby developers to get rid of unnecessary data within their project databases.
 Weather I succeed with it or not is up to you. I will appreciate any advice or help.

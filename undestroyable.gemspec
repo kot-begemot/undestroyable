@@ -24,7 +24,11 @@ for Ruby developers to get rid of unnecessary data within their project database
 
   s.add_development_dependency("activesupport", ">= 3.0.0")
   s.add_development_dependency("activerecord", ">= 3.0.0")
-  s.add_development_dependency('sqlite3')
+  if RUBY_ENGINE == 'jruby'
+    s.add_development_dependency('jdbc-sqlite3')
+  else
+    s.add_development_dependency('sqlite3')
+  end
   s.add_development_dependency("database_cleaner", "~> 0.7.2")
   #s.add_development_dependency('ruby-debug19')
 end

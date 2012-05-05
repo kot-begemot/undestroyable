@@ -1,7 +1,6 @@
 module Undestroyable
   
   class WrongStrategyError < Exception; end
-  class ConnectionIsCompulsaryError < Exception; end
 
   # Specifies which strategy to use for this configuration.
   #

@@ -4,13 +4,13 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = "undestroyable"
+  s.name = "bender"
   s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["E-Max"]
   s.date = "2012-05-15"
-  s.description = "An aim or this gem is to provide an agile and comfortable way \\\nfor Ruby developers to get rid of unnecessary data within their project databases."
+  s.description = "Deploying system"
   s.email = "emax@studentify.nl"
   s.extra_rdoc_files = [
     "LICENSE",
@@ -48,11 +48,11 @@ Gem::Specification.new do |s|
     "test/temp/test.db",
     "undestroyable.gemspec"
   ]
-  s.homepage = "http://github.com/kot-begemot/undestroyable"
+  s.homepage = "http://github.com/kot-begemot/Bender"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.10"
-  s.summary = "Undestroyable gem"
+  s.summary = "Deploying system connecting Heroku, Github, Gist and Jabber chat room."
 
   if s.respond_to? :specification_version then
     s.specification_version = 3

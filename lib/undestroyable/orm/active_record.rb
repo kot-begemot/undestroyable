@@ -3,10 +3,11 @@ require 'active_record'
 module Undestroyable
   module Orm
     module ActiveRecord
-      autoload :Column,   'undestroyable/orm/active_record/column'
-      autoload :Table,    'undestroyable/orm/active_record/table'
-      autoload :Database, 'undestroyable/orm/active_record/database'
-      autoload :Dump,     'undestroyable/orm/active_record/dump'
+      autoload :Connection, 'undestroyable/orm/active_record/connection'
+      autoload :Column,     'undestroyable/orm/active_record/column'
+      autoload :Table,      'undestroyable/orm/active_record/table'
+      autoload :Database,   'undestroyable/orm/active_record/database'
+      autoload :Dump,       'undestroyable/orm/active_record/dump'
 
       def self.included(base)
         base.instance_eval { alias_method :destroy!, :destroy }
@@ -18,6 +19,7 @@ module Undestroyable
           undestr_config(&block) unless @undestr_config
           undestr_config.table_name(table_name) unless undestr_config[:table_name]
           undestr_include_startegy
+          ::Undestroyable::Orm::ActiveRecord::Connection.set_configurations(self, undestr_config.get_connection_settings) if undestr_config.get_connection_settings
           undestr_config
         end
 

@@ -1,9 +1,9 @@
+require 'undestroyable/orm'
+
 module Undestroyable
   autoload :Configuration, 'undestroyable/configuration'
+  autoload :Connection, 'undestroyable/connection'
   autoload :STRATEGIES, 'undestroyable/strategies'
-  autoload :VERSION, 'undestroyable/version'
-
-  require 'undestroyable/orm'
 
   module Orm
     autoload :ActiveRecord, 'undestroyable/orm/active_record'

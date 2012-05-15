@@ -73,7 +73,7 @@ module Undestroyable
 
     def prepare &block
       instance_eval &block
-      raise(::Undestroyable::ConnectionIsCompulsaryError.new "Connection information is compulsary") if database? && connection_settings.blank?
+      raise(::Undestroyable::ConnectionIsCompulsaryError.new "Connection information is compulsary") if database? && get_connection_settings.blank?
     end
     alias_method :setup, :prepare
 
@@ -102,27 +102,13 @@ module Undestroyable
       @configuration[:strategy] = shrtkey.to_sym
     end
 
-    def table_name(alternative_table_name)
-      @configuration[:table_name] = alternative_table_name
+    %w(table_name table_prefix table_suffix full_table_name connection).each do |parameter|
+      define_method parameter do |param_value|
+        @configuration[parameter.to_sym] = param_value
+      end
     end
 
-    def table_prefix(alternative_table_prefix)
-      @configuration[:table_prefix] = alternative_table_prefix
-    end
-
-    def table_suffix(alternative_table_suffix)
-      @configuration[:table_suffix] = alternative_table_suffix
-    end
-
-    def full_table_name(alternative_full_table_name)
-      @configuration[:full_table_name] = alternative_full_table_name
-    end
-
-    def connection(alternative_connection)
-      @configuration[:connection] = alternative_connection
-    end
-
-    def connection_settings
+    def get_connection_settings
       @configuration[:connection]
     end
 

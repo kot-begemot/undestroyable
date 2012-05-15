@@ -35,24 +35,29 @@ module Undestroyable
         end
 
         module ClassMethods
-          # Because undest_arel_table is just being ignored over there....
-          def undest_mirror
-            @undest_mirror ||= begin
-              copy = self.dup
-              copy.table_name = undestr_config[:full_table_name]
-              def copy.name; undestr_config[:full_table_name].to_s.classify; end
-              copy.establish_connection undestr_config[:connection]
-              copy
+          def undest_relation
+            # something about connection here
+            @undest_relation ||= begin
+              relation = ::ActiveRecord::Relation.new(self, undest_arel_table)
+              def relation.connection
+                undest_connection
+              end
+              relation
             end
           end
-          protected :undest_mirror
+
+          def undest_connection
+            @undest_connection ||= ::Undestroyable::Orm::ActiveRecord::Connection.get_connection(self)
+          end
         end
 
         module InstanceMethods
           def destroy
             run_callbacks :destroy do
               deleted_attributes = undest_compile_insert_attributes
-              deleted_attributes << [self.class.undest_arel_table['deleted_at'], Time.now.utc] if self.class.send(:undest_mirror).columns_hash['deleted_at']
+              if self.class.connection.column_exists? self.class.send(:undestr_config)[:full_table_name], 'deleted_at'
+                deleted_attributes << [self.class.undest_arel_table['deleted_at'], Time.now.utc]
+              end
               self.class.undest_relation.insert deleted_attributes
               destroy!
             end

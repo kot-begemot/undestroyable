@@ -143,7 +143,7 @@ module ActiveRecordTest
       country.destroy
 
       value = Country.unscoped.last
-      undest_value = Country.send(:undest_mirror).last
+      undest_value = Country.undest_relation.last
 
       assert_nil value
       assert_not_nil undest_value

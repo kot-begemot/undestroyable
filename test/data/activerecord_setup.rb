@@ -7,7 +7,7 @@ ActiveRecord::Base.establish_connection(
   :database => ':memory:'
 )
 
-#ActiveRecord::Base.logger = Logger.new(STDOUT)
+ActiveRecord::Base.logger = Logger.new(STDOUT)
 
 module ActiveRecordSetup
   def before_setup

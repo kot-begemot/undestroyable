@@ -4,21 +4,34 @@ module Undestroyable
 
   class Connection
     class << self
-      attr_reader :connections
+      attr_reader :connections, :configurations
 
-      def [](klass_name)
-        @connections[klass_name.to_sym]
+      def set_configurations(klass, config)
+        (@configurations ||= {})[klass.name] = config
       end
 
-      def establish_connection(klass, config)
-        self[klass.name] ||= create_connection(config)
+      def get_configurations(klass)
+        if klass == Object
+          (@configurations ||= {})['Undestroyable']
+        else
+          (@configurations ||= {})[klass.name]
+        end
+      end
+
+      def [](klass_name)
+        (@connections ||= {})[klass_name.to_sym]
+      end
+
+      def establish_connection(klass)
+        (@connections ||= {})[klass.name] ||= create_connection(klass, get_configurations(klass))
       end
 
       def get_connection(klass)
-        if klass == Object
-          self['Undestroyable']
+        return nil if klass == Object
+        if !get_configurations(klass).blank?
+          self[klass.name] || establish_connection(klass)
         else
-          (self[klass.name] || get_connection(klass.superclass))
+          get_connection(klass.superclass)
         end
       end
 

@@ -38,18 +38,8 @@ module Undestroyable
           end
 
           def undest_relation
-            @undest_relation ||= ::ActiveRecord::Relation.new(undest_mirror, undest_arel_table)
+            @undest_relation ||= ::ActiveRecord::Relation.new(self, undest_arel_table)
           end
-
-          # Because undest_arel_table is just being ignored over there.... 
-          def undest_mirror
-            @undest_mirror ||= begin
-              copy = self.dup
-              copy.table_name = undestr_config[:full_table_name]
-              copy
-            end
-          end
-          protected :undest_mirror
         end
 
         module InstanceMethods

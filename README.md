@@ -100,3 +100,7 @@ Weather I succeed with it or not is up to you. I will appreciate any advice or h
         table_suffix :metalic
       end
     end
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/kot-begemot/undestroyable/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+

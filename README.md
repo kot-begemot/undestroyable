@@ -70,7 +70,7 @@ Weather I succeed with it or not is up to you. I will appreciate any advice or h
 * full_table_name
     table_prefix + table_name + table_suffix.
 * connection
-    Keeps connection information. _NB!_ Compulsary for :database startegy.
+    Keeps connection information. _NB!_ Compulsory for :database startegy.
 
 # Strategies
 
